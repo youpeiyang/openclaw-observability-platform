@@ -21,7 +21,7 @@ const PAGE_META = {
   "config-change": { title: "配置变更", subtitle: "关键配置项变更历史与合规留痕" },
   "audit-overview": {
     title: "审计概览",
-    subtitle: "核心指标、风险统计、实时态势、趋势与排行（Doris 聚合）",
+    subtitle: "核心指标、风险统计、实时态势、趋势与排行",
   },
   "session-audit": { title: "会话审计", subtitle: "OpenClaw 会话索引、模型与 Token 用量合规留痕" },
   traceability: { title: "全链路溯源", subtitle: "按会话 ID 查看链路时间轴与步骤详情" },
@@ -286,7 +286,7 @@ function statusBadgeClass(status) {
 }
 
 export default function Dashboard() {
-  const [activeNav, setActiveNavRaw] = useState(() => localStorage.getItem("audit-overview") || "panorama");
+  const [activeNav, setActiveNavRaw] = useState(() => localStorage.getItem("nav-active") || "audit-overview");
   const [navGroupOpen, setNavGroupOpenRaw] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("nav-group-open")) || {
