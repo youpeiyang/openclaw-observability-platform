@@ -286,7 +286,7 @@ function statusBadgeClass(status) {
 }
 
 export default function Dashboard() {
-  const [activeNav, setActiveNavRaw] = useState(() => localStorage.getItem("nav-active") || "panorama");
+  const [activeNav, setActiveNavRaw] = useState(() => localStorage.getItem("audit-overview") || "panorama");
   const [navGroupOpen, setNavGroupOpenRaw] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("nav-group-open")) || {
@@ -499,24 +499,6 @@ export default function Dashboard() {
           </div>
           <div className="flex items-center gap-2 sm:gap-3">
             <ThemeToggle />
-            <button
-              type="button"
-              className="relative inline-flex h-10 w-10 items-center justify-center rounded-lg text-gray-500 transition hover:bg-gray-100 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100"
-              aria-label="通知"
-            >
-              <Icon name="bell" />
-              <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-gray-950" />
-            </button>
-            <div className="hidden h-8 w-px bg-gray-200 dark:bg-gray-700 sm:block" />
-            <div className="flex items-center gap-3 rounded-lg px-2 py-1.5 transition hover:bg-gray-50 dark:hover:bg-gray-800/80">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-gray-200 to-gray-300 text-xs font-semibold text-gray-700 dark:from-gray-600 dark:to-gray-700 dark:text-gray-200">
-                K
-              </div>
-              <div className="hidden text-left sm:block">
-                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Kevin</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">管理员</p>
-              </div>
-            </div>
           </div>
         </header>
 
