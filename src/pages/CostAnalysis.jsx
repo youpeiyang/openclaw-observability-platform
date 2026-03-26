@@ -16,10 +16,22 @@ import {
   YAxis,
 } from "recharts";
 
-/** 原始 Token 数展示 */
+/** Token 数展示：自适应 K / M / B 单位 */
 function fmtTokens(n) {
   const x = Math.round(Number(n) || 0);
-  return x.toLocaleString("zh-CN");
+  if (x >= 1e9) {
+    const v = x / 1e9;
+    return `${v >= 10 ? v.toFixed(0) : v.toFixed(1)}B`;
+  }
+  if (x >= 1e6) {
+    const v = x / 1e6;
+    return `${v >= 10 ? v.toFixed(0) : v.toFixed(1)}M`;
+  }
+  if (x >= 1e3) {
+    const v = x / 1e3;
+    return `${v >= 10 ? v.toFixed(0) : v.toFixed(1)}K`;
+  }
+  return String(x);
 }
 
 const CARD_ACCENTS = [
