@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
+import CodeBlock from "../components/CodeBlock.jsx";
 import {
   Bar,
   BarChart,
@@ -46,7 +47,7 @@ function rowBgClass(level, selected) {
   if (level === "red")
     return "bg-red-50/90 hover:bg-red-50 dark:bg-red-950/30 dark:hover:bg-red-950/50";
   if (level === "yellow")
-    return "bg-amber-50/70 hover:bg-amber-50/90 dark:bg-amber-950/25 dark:hover:bg-amber-950/40";
+    return "hover:bg-amber-50/90 dark:bg-amber-950/25 dark:hover:bg-amber-950/40";
   return "bg-white hover:bg-gray-50/80 dark:bg-gray-900/40 dark:hover:bg-gray-800/60";
 }
 
@@ -588,11 +589,9 @@ export default function ConfigChange() {
                                       </div>
                                     )}
                                     {detailTab === "raw" && (
-                                      <div role="tabpanel">
-                                        <pre className="max-h-72 overflow-auto rounded-lg bg-gray-50 p-3 font-mono text-xs text-gray-800 dark:bg-gray-900 dark:text-gray-200 sm:max-h-96">
-                                          {JSON.stringify(e, null, 2)}
-                                        </pre>
-                                      </div>
+                                    <CodeBlock text={JSON.stringify(e, null, 2)} variant="auto" height="2xl" className="sm:max-h-96">
+                                      {JSON.stringify(e, null, 2)}
+                                    </CodeBlock>
                                     )}
                                   </div>
                                 </div>

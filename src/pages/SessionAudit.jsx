@@ -1,4 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
+import CopyButton from "../components/CopyButton.jsx";
+import CodeBlock from "../components/CodeBlock.jsx";
+import LoadingSpinner from "../components/LoadingSpinner.jsx";
 import TablePagination, { DEFAULT_TABLE_PAGE_SIZE } from "../components/TablePagination.jsx";
 import {
   agentSessionsLogsRowsToLines,
@@ -282,11 +285,15 @@ function ChatAssistantMessageBody({ msg, strArgs }) {
         }
         if (c.type === "toolCall") {
           return (
-            <div key={i} className="rounded-lg border border-gray-200 bg-gray-50/90 px-3 py-2">
-              <div className="text-xs font-semibold text-primary">
+            <div key={i} className="rounded-lg border border-gray-200 bg-gray-50/90 px-3 pb-2 pt-1">
+              <div className="mb-1 text-xs font-semibold text-primary">
                 工具调用 · <span className="font-mono">{c.name ?? "—"}</span>
               </div>
-              <pre className="mt-1 max-h-48 overflow-auto font-mono text-[11px] leading-relaxed text-gray-700">{strArgs(c.arguments)}</pre>
+              <div className="relative pr-8">
+                <CodeBlock text={strArgs(c.arguments)} variant="light" height="md" font="mono" className="max-h-48">
+                  {strArgs(c.arguments)}
+                </CodeBlock>
+              </div>
             </div>
           );
         }
@@ -516,7 +523,7 @@ function SessionAuditDetail({ row, onBack }) {
           {row.label && (
             <div className="sm:col-span-2">
               <dt className="text-xs font-medium text-gray-500 dark:text-gray-400">标签</dt>
-              <dd className="mt-2 rounded-r-md border-l-4 border-amber-400 bg-amber-50/90 px-3 py-2 text-sm font-medium text-amber-950 dark:border-amber-500 dark:bg-amber-950/40 dark:text-amber-100">
+              <dd className="inline-block mt-2 rounded-lg border-2 border-amber-400 bg-amber-50/90 px-3 py-2 text-sm font-medium text-amber-950 dark:border-amber-500 dark:bg-amber-950/40 dark:text-amber-100">
                 {row.label}
               </dd>
             </div>
@@ -526,7 +533,11 @@ function SessionAuditDetail({ row, onBack }) {
           <summary className="cursor-pointer text-xs font-medium text-indigo-800 hover:text-indigo-950 dark:text-indigo-300 dark:hover:text-indigo-200">
             完整索引 JSON（已省略技能快照等大字段）
           </summary>
-          <pre className="mt-3 max-h-64 overflow-auto font-mono text-[11px] leading-relaxed text-gray-800 dark:text-gray-200">{summaryStrip(row)}</pre>
+          <div className="relative pr-8">
+            <CodeBlock text={summaryStrip(row)} variant="dark" height="lg" font="mono" className="max-h-64">
+              {summaryStrip(row)}
+            </CodeBlock>
+          </div>
         </details>
       </section>
 
@@ -541,7 +552,7 @@ function SessionAuditDetail({ row, onBack }) {
           </p>
         </div>
 
-        {jsonlStatus === "loading" && <p className="mt-4 text-sm text-gray-500">正在加载转写…</p>}
+        {jsonlStatus === "loading" && <LoadingSpinner message="正在加载转写…" />}
         {jsonlStatus === "error" && (
           <p className="mt-4 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900">{jsonlError}</p>
         )}
@@ -852,9 +863,11 @@ function SessionAuditDetail({ row, onBack }) {
                         </button>
                       </div>
                       {raw && (
-                        <pre className="mt-3 max-h-56 overflow-auto rounded-md bg-gray-900/90 p-3 font-mono text-[11px] leading-relaxed text-gray-100">
-                          {JSON.stringify(line, null, 2)}
-                        </pre>
+                        <div className="flex items-start justify-between gap-2">
+                          <CodeBlock text={JSON.stringify(line, null, 2)} variant="dark" height="lg" font="mono" className="mt-3 flex-1">
+                            {JSON.stringify(line, null, 2)}
+                          </CodeBlock>
+                        </div>
                       )}
                     </div>
                     </div>
@@ -915,9 +928,11 @@ function SessionAuditDetail({ row, onBack }) {
                             </button>
                           </div>
                           {raw && (
-                            <pre className="mt-3 max-h-56 overflow-auto rounded-md bg-gray-900/90 p-3 font-mono text-[11px] leading-relaxed text-gray-100">
-                              {JSON.stringify(line, null, 2)}
-                            </pre>
+                            <div className="flex items-start justify-between gap-2">
+                              <CodeBlock text={JSON.stringify(line, null, 2)} variant="dark" height="lg" font="mono" className="mt-3 flex-1">
+                                {JSON.stringify(line, null, 2)}
+                              </CodeBlock>
+                            </div>
                           )}
                         </div>
                       </li>
@@ -1015,9 +1030,12 @@ function SessionAuditDetail({ row, onBack }) {
                                     <span className="rounded bg-red-100 px-1.5 py-0.5 text-red-700">错误</span>
                                   )}
                                 </div>
-                                <pre className="max-h-96 overflow-auto whitespace-pre-wrap break-words font-sans text-xs leading-relaxed">
-                                  {messageTextContent(msg)}
-                                </pre>
+                                <div className="flex items-start justify-between gap-2">
+                                  <pre className="max-h-96 flex-1 overflow-auto whitespace-pre-wrap break-words font-sans text-xs leading-relaxed">
+                                    {messageTextContent(msg)}
+                                  </pre>
+                                  <CopyButton text={messageTextContent(msg)} className="shrink-0" />
+                                </div>
                               </div>
                               {chatMetaRow("center")}
                             </div>
@@ -1027,7 +1045,10 @@ function SessionAuditDetail({ row, onBack }) {
                         return (
                           <div key={`chat-${lineIndex}-${kid}`} className="flex flex-col items-start gap-1">
                             <div className="max-w-[min(92%,720px)] rounded-2xl border border-gray-300 bg-gray-100 px-4 py-2 text-xs text-gray-800">
-                              <span className="font-medium text-gray-600">message · {role}</span>
+                              <div className="mb-1 flex items-center justify-between gap-2">
+                                <span className="font-medium text-gray-600">message · {role}</span>
+                                <CopyButton text={JSON.stringify(msg, null, 2)} className="shrink-0" />
+                              </div>
                               <pre className="mt-1 max-h-48 overflow-auto text-[11px] leading-relaxed">{JSON.stringify(msg, null, 2)}</pre>
                             </div>
                             {chatMetaRow("start")}

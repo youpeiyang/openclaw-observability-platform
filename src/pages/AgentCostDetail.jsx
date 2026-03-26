@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import LoadingSpinner from "../components/LoadingSpinner.jsx";
 import CostTimeRangeFilter, {
   defaultRangeLastDays,
   parseLocalMs,
@@ -166,10 +167,6 @@ export default function AgentCostDetail() {
         onChangeEnd={setRangeEnd}
       />
 
-      {legend ? (
-        <p className="text-xs leading-relaxed text-gray-500 dark:text-gray-400">{legend}</p>
-      ) : null}
-
       {err ? (
         <div className="rounded-lg border border-rose-200 bg-rose-50/80 px-4 py-3 text-sm text-rose-800 dark:border-rose-900/60 dark:bg-rose-950/40 dark:text-rose-200">
           {err}
@@ -194,7 +191,7 @@ export default function AgentCostDetail() {
             导出 CSV
           </button>
         </div>
-        {loading ? <p className="mt-4 text-sm text-gray-500">加载中…</p> : null}
+        {loading ? <LoadingSpinner message="加载中…" /> : null}
         {rangeValid && totalRows > 0 && !loading ? (
           <TablePagination
             className="mt-6"

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import LoadingSpinner from "../components/LoadingSpinner.jsx";
 import AgentTokenRoseChart from "../components/AgentTokenRoseChart.jsx";
 import {
   Area,
@@ -143,7 +144,7 @@ export default function CostAnalysis() {
             <div key={i} className="app-card h-40 animate-pulse bg-gray-100/80 dark:bg-gray-800/80" />
           ))}
         </div>
-        <p className="text-center text-sm text-gray-500">正在加载成本概览…</p>
+        <LoadingSpinner message="正在加载成本概览…" />
       </div>
     );
   }
@@ -158,10 +159,6 @@ export default function CostAnalysis() {
 
   return (
     <div className="space-y-6">
-      {snapshot?.legend ? (
-        <p className="text-xs leading-relaxed text-gray-500 dark:text-gray-400">{snapshot.legend}</p>
-      ) : null}
-
       {/* 成本总览 */}
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {overviewCards.map((m) => (

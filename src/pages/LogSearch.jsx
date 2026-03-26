@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import CodeBlock from "../components/CodeBlock.jsx";
 import {
   Area,
   AreaChart,
@@ -739,10 +740,10 @@ export default function LogSearch() {
                   <dd className="mt-1 whitespace-pre-wrap break-words leading-relaxed text-gray-800 dark:text-gray-200">{buildMessageLine(detail)}</dd>
                 </div>
                 <div>
-                  <dt className="text-xs font-medium text-gray-500 dark:text-gray-400">log_attributes (JSON)</dt>
-                  <dd className="mt-2 overflow-x-auto rounded-lg bg-gray-900 p-4 font-mono text-xs leading-relaxed text-emerald-100">
-                    <pre>{safeJson(detail.log_attributes)}</pre>
-                  </dd>
+                  <dt className="mb-2 text-xs font-medium text-gray-500 dark:text-gray-400">log_attributes (JSON)</dt>
+                  <CodeBlock text={safeJson(detail.log_attributes)} variant="dark" height="2xl">
+                    {safeJson(detail.log_attributes)}
+                  </CodeBlock>
                 </div>
               </dl>
             </div>
