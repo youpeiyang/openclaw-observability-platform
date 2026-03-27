@@ -114,19 +114,6 @@ export default function AuditOverview() {
         </p>
       )}
 
-<<<<<<< HEAD
-      <section className="app-card p-4 sm:p-6">
-        <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">审计概览</h2>
-        <p className="mt-1 text-xs leading-relaxed text-gray-500 dark:text-gray-400">
-          基于 {" "}
-          <code className="rounded bg-gray-100 px-1 font-mono text-[11px] dark:bg-gray-800">otel.agent_sessions</code> 与{" "}
-          <code className="rounded bg-gray-100 px-1 font-mono text-[11px] dark:bg-gray-800">otel.agent_sessions_logs</code>
-          聚合：核心指标（今日/本周/本月）、风险统计、实时态势、近 7 日趋势与 TOP 排行。风险分级为日志行级 SQL 近似，与前端「风险感知」启发式可能略有差异。
-        </p>
-      </section>
-
-=======
->>>>>>> 96e5ae8b6aabce0d28902cddc5aa67061ce6d1a8
       {loading && !error && <LoadingSpinner message="正在加载仪表盘…" />}
 
       {!loading && data && (
