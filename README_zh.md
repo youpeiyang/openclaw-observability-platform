@@ -1,47 +1,12 @@
-# OpenClaw Observability Platform
+# OpenClaw 可观测性平台
 
-> English | [中文](./README_zh.md)
+OpenClaw Observability Platform 是一个面向OpenClaw的企业级可观测性平台，旨在为基于 OpenClaw 框架构建的数字员工提供全方位的监控、审计与成本分析能力。
 
-**OpenClaw Observability Platform** is an enterprise-grade observability solution designed for AI Agents built on the OpenClaw framework. It provides comprehensive monitoring, auditing, and cost analysis capabilities for digital employees.
-
-Built on the **KWeaver Core** framework, OpenClaw Observability Platform integrates **OpenTelemetry (OTel)** and **eBPF** technologies to achieve full链路 (end-to-end) tracing and monitoring of AI Agents. Through rapid fault isolation, security compliance management, and lean resource optimization, it ensures reliable operation and scalable performance for AI-powered business ecosystems.
+**OpenClaw 可观测性平台**，基于 KWeaver Core 框架构建，融合 OpenTelemetry (OTel) 与 eBPF 技术，实现 AI Agent 的全链路追踪与监控。通过快速故障隔离、安全合规管控与精益资源优化，确保 AI 赋能业务生态的可靠运行与规模化性能
 
 ---
 
-## Table of Contents
-
-- [Features](#features)
-- [Architecture](#architecture)
-- [Quick Start](#quick-start)
-- [Configuration](#configuration)
-- [Development](#development)
-- [Environment Variables](#environment-variables)
-- [Community](#community)
-- [License](#license)
-
----
-
-## Features
-
-### 1. Security Audit
-
-| Module | Description |
-|--------|-------------|
-| **Audit Overview** | Core security metrics, risk statistics, real-time situational awareness, trends and rankings |
-| **Configuration Changes** | History of critical configuration changes with multi-dimensional filtering by source, event type, and configuration path |
-| **Session Audit** | OpenClaw session indexing, model usage, and Token consumption compliance logging |
-
-### 2. Cost Analysis
-
-| Module | Description |
-|--------|-------------|
-| **Cost Overview** | Total cost, daily average consumption, multi-dimensional proportion analysis, and trend charts |
-| **Agent Cost List** | Per-Agent total consumption, average cost per task, call volume, and success rate statistics |
-| **LLM Cost Details** | Token usage and cost details by model dimension |
-
----
-
-## Architecture
+## 项目架构
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -76,23 +41,49 @@ Built on the **KWeaver Core** framework, OpenClaw Observability Platform integra
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Core Components
+### 核心组件
 
-| Component | Tech Stack | Port | Description |
-|-----------|------------|------|-------------|
-| **Frontend** | React 18 + Vite + Tailwind CSS | 3000 | Observability Web UI |
-| **Backend API** | Node.js | 8787 | RESTful API service for data queries |
-| **Database** | Apache Doris | 9030 (MySQL) / 8040 (BE) | OLAP analytics database for session and log storage |
-| **Data Pipeline** | Vector | - | Data collection, transformation, and ingestion pipeline |
-| **Data Source** | OpenClaw Agent | - | AI Agent runtime, source of log output |
+| 组件 | 技术栈 | 端口 | 说明 |
+|------|--------|------|------|
+| **Frontend** | React 18 + Vite + Tailwind CSS | 3000 | 可观测性 Web 界面 |
+| **Backend API** | Node.js | 8787 | RESTful API 服务，提供数据查询接口 |
+| **Database** | Apache Doris | 9030 (MySQL) / 8040 (BE) | OLAP 分析数据库，存储会话与日志数据 |
+| **Data Pipeline** | Vector | - | 数据采集、转换与写入管道 |
+| **Data Source** | OpenClaw Agent | - | AI Agent 运行时，日志输出源 |
 
-### Data Flow
+---
+
+## 功能介绍
+
+### 1. 安全审计 (Security Audit)
+
+| 功能模块 | 说明 |
+|----------|------|
+| **审计概览** | 核心安全指标、风险统计、实时态势、趋势与排行 |
+| **配置变更** | 关键配置项变更历史记录，支持按来源、事件类型、配置路径等多维度筛选 |
+| **会话审计** | OpenClaw 会话索引、模型使用与 Token 用量合规留痕 |
+
+
+### 2 成本分析 (Cost Analysis)
+
+
+=======
+| 功能模块 | 说明 |
+|----------|------|
+| **成本概览** | 总成本、日均消耗、多维度占比分析、趋势图表 |
+| **Agent 成本列表** | 各 Agent 的总消耗、单任务平均消耗、调用量与成功率统计 |
+| **LLM 成本明细** | 按模型维度的 Token 使用量与费用明细 |
+
+---
+
+
+## 如何工作
 
 ```
 ┌─────────┐    ┌───────────────────┐    ┌─────────────────┐    ┌──────────────┐
 │OpenClaw │───►│ Vector Pipeline   │───►│ Apache Doris     │◄───│   Frontend   │
-│ Agent   │    │ (Data Collection  │    │ (Storage &      │    │  (Visualization) │
-│ Logs    │    │  & Transformation)│    │  Analytics)     │    │              │
+│ Agent   │    │ (数据采集与转换)   │    │ (数据存储分析)   │    │   (可视化)   │
+│ Logs    │    │                   │    │                 │    │              │
 └─────────┘    └───────────────────┘    └─────────────────┘    └──────┬───────┘
                                                                           │
                                            ┌─────────────────┐            │
@@ -102,47 +93,53 @@ Built on the **KWeaver Core** framework, OpenClaw Observability Platform integra
                                            └─────────────────┘
 ```
 
----
+## 快速启动
 
-## Quick Start
-
-### Prerequisites
+### 环境要求
 
 - Docker Desktop
 - Node.js 18+
-- (Optional) Vector for log collection
-
-### Method 1: Docker Compose - Image Deployment (Recommended)
+### 方式一：Docker Compose -镜像 部署（推荐）
 
 ```bash
-# Start all services using pre-built images
+# 或使用完整路径
 docker compose -f docker-compose.yml up -d
 ```
-
-### Method 2: Docker Compose - Build & Deploy
+### 方式二：Docker Compose -编译 部署
 
 ```bash
-# Build and start all services from source
+# 构建并启动所有服务
 docker compose up -d
 
-# Or use the build compose file
+# 或使用完整路径
 docker compose -f docker-compose-build.yml up -d
 ```
 
-After services start, access:
+服务启动后访问：
 
-| Service | URL |
-|---------|-----|
-| Frontend UI | http://localhost:3000 |
+| 服务 | 地址 |
+|------|------|
+| 前端界面 | http://localhost:3000 |
 | Doris FE | http://localhost:8030 |
 
----
+### 方式二：本地开发
 
-## Configuration
+```bash
+# 安装依赖
+npm install
 
-### Vector Data Collection Configuration
+# 启动后端 API（端口 8787）
+npm run api
 
-Modify the data source paths in `vector.yaml` to point to your actual OpenClaw log directory:
+# 另起终端，启动前端开发服务器（端口 3000）
+npm run dev
+```
+
+### 配置 Vector 数据采集
+
+
+
+修改 `vector.yaml` 中的数据源路径，指向实际的 OpenClaw 日志目录：
 
 ```yaml
 sources:
@@ -154,75 +151,40 @@ sources:
       - "/path/to/openclaw/agents/*/sessions/*.jsonl"
 ```
 
-### Vector Installation (macOS)
+macos vector 安装：
 
 ```bash
 brew tap vectordotdev/brew && brew install vector
 ```
 
-### Start Vector
+启动 Vector：
 
 ```bash
 vector --config vector.yaml
 ```
 
----
+### 环境变量
 
-## Development
-
-### Local Development Setup
-
-```bash
-# Install dependencies
-npm install
-
-# Start backend API (port 8787)
-npm run api
-
-# In a separate terminal, start frontend dev server (port 3000)
-npm run dev
-```
+| 变量 | 默认值 | 说明 |
+|------|--------|------|
+| `DORIS_HOST` | doris | Doris 主机名 |
+| `DORIS_PORT` | 9030 | Doris MySQL 端口 |
+| `DORIS_USER` | root | 数据库用户名 |
+| `DORIS_PASSWORD` | (空) | 数据库密码 |
+| `DORIS_DATABASE` | opsRobot | 数据库名称 |
+| `API_PORT` | 8787 | Backend API 端口 |
+| `FRONTEND_PORT` | 3000 | 前端端口 |
 
 ---
 
-## Environment Variables
+## 微信交流群
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `DORIS_HOST` | doris | Doris hostname |
-| `DORIS_PORT` | 9030 | Doris MySQL port |
-| `DORIS_USER` | root | Database username |
-| `DORIS_PASSWORD` | (empty) | Database password |
-| `DORIS_DATABASE` | opsRobot | Database name |
-| `API_PORT` | 8787 | Backend API port |
-| `FRONTEND_PORT` | 3000 | Frontend port |
-
----
-
-## Community
-
-### WeChat Community
-
-Scan the QR code below to join the WeChat community for discussions:
+扫描下方二维码加入微信交流群：
 
 ![WeChat QR Code](./wechat-qr.png)
-
-### Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-### Issues
-
-If you encounter any issues, please file them on our [GitHub Issues](https://github.com/openclaw-ai/observability-platform/issues) page.
 
 ---
 
 ## License
 
-This project is licensed under the [Apache License 2.0](LICENSE).
-
----
-
-<p align="center">
-  <strong>OpenClaw Observability Platform</strong> · Built with ❤️ for AI Agent Observability
-</p>
+[Apache License 2.0](LICENSE)
