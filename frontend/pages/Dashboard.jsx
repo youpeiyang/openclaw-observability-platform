@@ -57,7 +57,7 @@ const NAV = [
       // { id: "audit", label: "行为审计" },
       { id: "config-change", label: "配置变更" },
       { id: "session-audit", label: "会话审计" },
-      { id: "traceability", label: "全链路溯源" },
+      // { id: "traceability", label: "全链路溯源" },
     ],
   },
   { id: "logs", label: "日志查询", icon: "logs" },
