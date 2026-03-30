@@ -2,12 +2,6 @@
 
 > English | [中文](./README_zh.md)
 
-**OpenClaw Observability Platform** is an enterprise-grade observability solution designed for AI Agents built on the OpenClaw framework. It provides comprehensive monitoring, auditing, and cost analysis capabilities for digital employees.
-
-**OpenClaw Observability Platform**, built on the **KWeaver Core** framework, integrates **OpenTelemetry (OTel)** and **eBPF** technologies to achieve full end-to-end tracing and monitoring of AI Agents. Through rapid fault isolation, security compliance management, and lean resource optimization, it ensures reliable operation and scalable performance for AI-powered business ecosystems.
-
----
-
 **OpenClaw Observability Platform**, developed based on the KWeaver Core framework, uses OTel protocol and eBPF technology for full-linkage tracing and monitoring of AI Agents. It provides rapid fault diagnosis, security compliance management, and lean computing operations capabilities to ensure high-quality growth of AI-powered businesses.
 
 ## Core Features & Business Value
@@ -55,7 +49,7 @@
 │  └────────────────────────────────────────────────────────-┘    │
 │           ▲                                                     │
 │           │                                                     │
-│  ┌────────┴─────────────-─┐                                     │
+│  ┌────────┴───────────────┐                                     │
 │  │   OpenClaw Agent       │                                     │
 │  │   Session Logs         │                                     │
 │  │   (sessions.json /     │                                     │
@@ -99,16 +93,16 @@
 ## How It Works
 
 ```
-┌─────────┐    ┌───────────────────┐    ┌─────────────────┐    ┌──────────────┐
-│OpenClaw │───►│ Vector Pipeline   │───►│ Apache Doris     │◄───│   Frontend   │
-│ Agent   │    │ (Data Collection  │    │ (Storage &      │    │   (Visualization) │
-│ Logs    │    │  & Transformation)│    │  Analytics)     │    │              │
-└─────────┘    └───────────────────┘    └─────────────────┘    └──────┬───────┘
-                                                                          │
-                                           ┌─────────────────┐            │
-                                           │   Backend API    │◄───────────┘
-                                           │   (Node.js)      │
-                                           │   Port: 8787     │
+┌─────────┐    ┌───────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│OpenClaw │───►│ Vector Pipeline   │───►│ Apache Doris    │◄───│    Frontend     │
+│ Agent   │    │ (Data Collection  │    │ (Storage &      │    │ (Visualization) │
+│ Logs    │    │  & Transformation)│    │  Analytics)     │    │                 │
+└─────────┘    └───────────────────┘    └─────────────────┘    └────────┬────────┘
+                                                                        │
+                                           ┌─────────────────┐          │
+                                           │   Backend API   │◄─────────┘
+                                           │   (Node.js)     │
+                                           │   Port: 8787    │
                                            └─────────────────┘
 ```
 
