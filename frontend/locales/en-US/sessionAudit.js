@@ -85,6 +85,9 @@ export default {
   "sessionAudit.noThinkingBlock": "No thinking blocks in this session.",
 
   "sessionAudit.assistantTurns": "Assistant Turns",
+  "sessionAudit.modelSigmaTotalTokens": "Σ totalTokens",
+  "sessionAudit.modelSigmaInputOutput": "Σ input / output",
+  "sessionAudit.modelSigmaUsageCost": "Σ cost (usage.cost.total)",
   "sessionAudit.configAndSnapshot": "Config & Snapshots",
   "sessionAudit.noModelSnapshot": "No model_change / thinking_level / model-snapshot records.",
   "sessionAudit.noAssistantUsage": "No assistant usage records.",

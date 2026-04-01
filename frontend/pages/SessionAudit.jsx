@@ -1036,19 +1036,19 @@ function SessionAuditDetail({ row }) {
                     <span className="font-semibold tabular-nums text-gray-900">{modelInvocations.assistantCalls.length}</span>
                   </div>
                   <div className="rounded-lg border border-gray-100 bg-gray-50/80 px-3 py-2">
-                    <span className="text-gray-500">Σ totalTokens</span>{" "}
+                    <span className="text-gray-500">{intl.get("sessionAudit.modelSigmaTotalTokens")}</span>{" "}
                     <span className="font-semibold tabular-nums text-gray-900">
                       {num(modelInvocations.totals.totalTokens)}
                     </span>
                   </div>
                   <div className="rounded-lg border border-gray-100 bg-gray-50/80 px-3 py-2">
-                    <span className="text-gray-500">Σ input / output</span>{" "}
+                    <span className="text-gray-500">{intl.get("sessionAudit.modelSigmaInputOutput")}</span>{" "}
                     <span className="font-semibold tabular-nums text-gray-900">
                       {num(modelInvocations.totals.totalInput)} / {num(modelInvocations.totals.totalOutput)}
                     </span>
                   </div>
                   <div className="rounded-lg border border-gray-100 bg-gray-50/80 px-3 py-2">
-                    <span className="text-gray-500">Σ 费用 (usage.cost.total)</span>{" "}
+                    <span className="text-gray-500">{intl.get("sessionAudit.modelSigmaUsageCost")}</span>{" "}
                     <span className="font-semibold tabular-nums text-gray-900">
                       ${fmtUsd(modelInvocations.totals.totalCost)}
                     </span>

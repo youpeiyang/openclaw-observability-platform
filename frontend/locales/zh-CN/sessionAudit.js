@@ -85,6 +85,9 @@ export default {
   "sessionAudit.noThinkingBlock": "本会话无 thinking 推理块。",
 
   "sessionAudit.assistantTurns": "助手轮次",
+  "sessionAudit.modelSigmaTotalTokens": "Σ 总 tokens（totalTokens）",
+  "sessionAudit.modelSigmaInputOutput": "Σ 输入 / 输出",
+  "sessionAudit.modelSigmaUsageCost": "Σ 费用（usage.cost.total）",
   "sessionAudit.configAndSnapshot": "配置与快照",
   "sessionAudit.noModelSnapshot": "无 model_change / thinking_level / model-snapshot 等记录。",
   "sessionAudit.noAssistantUsage": "无助手用量记录。",

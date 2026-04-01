@@ -208,11 +208,11 @@ export default function ConfigChange() {
           </div>
         </div>
 
-        <div className="mt-4 h-32 w-full min-w-0">
+        <div className="mt-4 h-32 w-full min-w-0 min-h-0">
           {loading ? (
             <LoadingSpinner message={intl.get("configChange.loadingTrend")} className="!py-4" />
           ) : (
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height={128} minWidth={0}>
               <BarChart data={chartData} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
                 <XAxis dataKey="label" tick={{ fontSize: 11 }} tickLine={false} axisLine={{ stroke: "#e5e7eb" }} />

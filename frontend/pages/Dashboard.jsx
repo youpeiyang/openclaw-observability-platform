@@ -516,7 +516,7 @@ export default function Dashboard() {
       <div className={[
         "relative flex min-h-0 w-0 flex-1 flex-col transition-[padding-left] duration-200"
       ].join(" ")}>
-        <header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b border-gray-200/80 bg-white/90 px-4 backdrop-blur-md dark:border-gray-800 dark:bg-gray-950/90 sm:px-6 lg:px-8">
+        <header className="relative z-20 flex h-16 shrink-0 items-center justify-between gap-4 border-b border-gray-200/80 bg-white/90 px-4 backdrop-blur-md dark:border-gray-800 dark:bg-gray-950/90 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
             <button
               type="button"
